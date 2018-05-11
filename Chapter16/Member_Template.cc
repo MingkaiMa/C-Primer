@@ -10,6 +10,10 @@ private:
 };
 
 
+template <typename T> class Blob {
+    template <typename It> Blob(It b, It e);
+}
+
 int main()
 {
     double *p = new double;
