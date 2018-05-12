@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <type_traits>
 
 template <typename T>
 T findMax(const T* data, int numItems) {
@@ -31,6 +32,16 @@ template <typename T> struct is_ptr<T*> {
     static const bool val = true;
 };
 
+
+template <typename T>
+void testIfNumberType(T i) {
+    if(std::is_integral<T>::value || std::is_floating_point<T>::value) {
+        std::cout << i << " is a number" << std::endl;
+    }
+    else {
+        std::cout << i << " is not a number" << std::endl;
+    }
+}
 int main()
 {
     int iArray[] = {-1, -3, -2};
@@ -45,4 +56,15 @@ int main()
 
     std::cout << is_ptr<int*>::val << std::endl;
     std::cout << is_ptr<int>::val << std::endl;
+
+    int i = 6;
+    long l = 7;
+    double d = 3.14;
+    testIfNumberType(i);
+    testIfNumberType(l);
+    testIfNumberType(d);
+    testIfNumberType(123);
+    testIfNumberType("Hello");
+    std::string s = "World";
+    testIfNumberType(s);
 }
